@@ -41,6 +41,11 @@
       "prettier --write"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/morgan": "^1.9.3",
