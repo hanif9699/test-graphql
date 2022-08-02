@@ -45,3 +45,4 @@
 {"level":"info","message":"POST /graphql 200 17660 - 4.856 ms\n-\n","timestamp":"2022-08-02T14:51:56.693Z"}
 {"level":"info","message":"POST /graphql 200 17660 - 3.729 ms\n-\n","timestamp":"2022-08-02T14:51:57.685Z"}
 {"level":"info","message":"POST /graphql 200 17660 - 3.925 ms\n-\n","timestamp":"2022-08-02T14:51:58.684Z"}
+{"level":"debug","message":"Server Started at 1000","timestamp":"2022-08-02T15:07:16.777Z"}
