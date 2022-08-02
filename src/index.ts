@@ -45,7 +45,7 @@ const main = async () => {
   const httpServer = http.createServer(app);
 
   //Listen at port
-  httpServer.listen('1000', () => {
+  httpServer.listen(app.get('PORT'), () => {
     logger.debug(`Server Started at ${app.get('PORT')}`);
   });
 };
