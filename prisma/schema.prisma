@@ -9,3 +9,33 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id                Int      @id @default(autoincrement())
+  username          String   @unique
+  email             String   @unique
+  mobileNo          String   @unique
+  password          String   @db.VarChar(200)
+  passwordChangedAt DateTime
+  role              Role     @default(User)
+  isEmailConfirmed  Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  profile           Profile?
+}
+
+model Profile {
+  id             Int      @id @default(autoincrement())
+  bio            String?
+  avatarUrl      String?
+  avatarPublicId String?
+  userId         Int      @unique
+  user           User     @relation(fields: [userId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+enum Role {
+  User
+  Admin
+}
