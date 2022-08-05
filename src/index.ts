@@ -1,34 +1,30 @@
+declare global {
+  var __basedir: string;
+}
 global.__basedir = __dirname;
 import 'reflect-metadata';
-import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import cors from 'cors';
-import morganMiddleware from './middleware/morganMiddleware';
 import http from 'http';
 import logger from './utils/logger';
 import { buildSchema } from 'type-graphql';
 import { HelloResolver } from './resolvers/hello';
-
-declare global {
-  var __basedir: string;
-}
+import { PrismaClient } from '@prisma/client';
+import app from './app';
 
 const main = async () => {
-  const app = express();
-
-  //Set
-  app.set('PORT', '1000');
-  app.set('trust proxy', 1);
-
-  //Middleware
-  app.use(cors());
-  app.use(morganMiddleware);
+  //Prisma client
+  const prisma = new PrismaClient();
 
   //Graphl server
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       resolvers: [HelloResolver],
       validate: false
+    }),
+    context: ({ req, res }) => ({
+      req,
+      res,
+      prisma
     })
   });
 
